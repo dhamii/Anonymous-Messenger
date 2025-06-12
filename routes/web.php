@@ -15,3 +15,11 @@ Route::get('/signup', [UserController::class, 'showSignUpForm'])->name('signupvi
 Route::post('/login', [UserController::class, 'login'])->name('login');
 
 Route::post('/signup', [UserController::class, 'signUp'])->name('signup');
+
+Route::get('/message/{id}', [MessagesController::class, 'show'])->name('message');
+
+Route::post('/message/create/{id}', [MessagesController::class, 'create'])->name('message.create');
+
+Route::get('message', [MessagesController::class, 'displayMessages'])->name('message.view');
+
+Route::post('/logout', [UserController::class, 'logout'])->name('logout');

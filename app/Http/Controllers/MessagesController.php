@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Http\Request;
+use App\Models\User;
 use App\Models\Messages;
+use Illuminate\Validation\Rules\Email;
 use App\Http\Requests\StoreMessagesRequest;
 use App\Http\Requests\UpdateMessagesRequest;
-use Illuminate\Validation\Rules\Email;
 
 class MessagesController extends Controller
 {
@@ -20,9 +21,16 @@ class MessagesController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request, $id)
     {
-        //
+        $incomingMessage = $request->validate([
+            'message' => 'required',
+        ]);
+        Messages::create([
+            'message' => $incomingMessage['message'],
+            'user_id' => $id,
+        ]);
+        return redirect('/');
     }
 
     /**
@@ -36,9 +44,13 @@ class MessagesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Messages $messages)
+    public function show($id)
     {
-        //
+        
+        $userinfo = User::where('id', $id)->firstOrFail();
+        $messageinfo = Messages::where('user_id', $id)->firstOrFail();
+        
+        return view('createmessage', compact('userinfo', 'messageinfo', 'id'));
     }
 
     /**
@@ -69,6 +81,16 @@ class MessagesController extends Controller
 
         $name = auth()->user()->name ?? 'Guest';
         $email = auth()->user()->email ?? '';
-        return view('dashboard', compact('name', 'email'));
+        $id = auth()->user()->id;
+        return view('dashboard', compact('name', 'email', 'id'));
+    }
+
+    public function displayMessages()
+    {
+
+        
+        $messages = Messages::where('user_id', auth()->user()->id)->get();
+
+        return view('messages', compact('messages'));
     }
 }

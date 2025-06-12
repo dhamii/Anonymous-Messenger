@@ -11,6 +11,6 @@
         <input type="text" name="email" placeholder="Email" required>
         <input type="password" name="password" placeholder="Password" required>
         <button type="submit">Login</button>
-        <p>Don't have an account? <a href="/register">Register here</a></p>
+        <p>Don't have an account? <a href="/signup">Register here</a></p>
     </form>
 @endsection

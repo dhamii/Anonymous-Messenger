@@ -40,6 +40,11 @@ class UserController extends Controller
         return "Invalid credentials";
         // return response()->json(['message' => 'Invalid credentials'], 401);
     }
+    public function logout()
+    {
+        auth()->logout();
+        return redirect('/login');
+    }
 
     //Views
 
