@@ -48,7 +48,7 @@ class MessagesController extends Controller
     {
         
         $userinfo = User::where('id', $id)->firstOrFail();
-        $messageinfo = Messages::where('user_id', $id)->firstOrFail();
+        $messageinfo = Messages::where('user_id', $id)->first();
         
         return view('createmessage', compact('userinfo', 'messageinfo', 'id'));
     }
