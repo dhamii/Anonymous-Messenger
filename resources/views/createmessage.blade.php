@@ -4,7 +4,7 @@
 @endsection
 
 @section('content')
-    Send a message to {{$userinfo->name}}<br>
+    Send a message to {{$userinfo->name}} with them knowing<br>
     <form action="{{route('message.create', ['id' => $id]) }}" method="POST">
         @csrf
         <textarea name="message"></textarea>

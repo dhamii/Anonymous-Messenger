@@ -78,7 +78,9 @@ class MessagesController extends Controller
     }
     public function dashboardview()
     {
-
+        if (!auth()->check()) {
+            return redirect('/login');
+        }
         $name = auth()->user()->name ?? 'Guest';
         $email = auth()->user()->email ?? '';
         $id = auth()->user()->id;
