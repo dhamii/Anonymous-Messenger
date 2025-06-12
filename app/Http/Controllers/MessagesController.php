@@ -90,7 +90,9 @@ class MessagesController extends Controller
     public function displayMessages()
     {
 
-        
+        if (!auth()->check()) {
+            return redirect('/login');
+        }
         $messages = Messages::where('user_id', auth()->user()->id)->get();
 
         return view('messages', compact('messages'));
