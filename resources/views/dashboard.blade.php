@@ -39,7 +39,13 @@
     <script>
             function openMessage() {
                 const uniqueLink = document.querySelector('.unique');
-                uniqueLink.style.display = 'block';
+                // uniqueLink.style.display = 'block';
+                if(uniqueLink.style.display == 'block'){
+                    uniqueLink.style.display = 'hidden';
+                }
+                else{
+                    uniqueLink.style.display = 'block';
+                }
             }
     </script>
 @endsection
